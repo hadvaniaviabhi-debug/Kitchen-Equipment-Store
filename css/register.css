@@ -1,0 +1,176 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f3ee;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+}
+
+.register-container {
+    width: 900px;
+    max-width: 100%;
+    min-height: 580px;
+    background: white;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+}
+
+/* Left Image Section */
+
+.register-image {
+    width: 40%;
+    background:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url("https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=900");
+
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: end;
+    padding: 35px;
+    color: white;
+}
+
+.image-content h1 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.image-content p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Right Form Section */
+
+.register-form {
+    width: 60%;
+    padding: 40px;
+}
+
+.register-form h2 {
+    color: #29352c;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+    background: #fff;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #657c59;
+    box-shadow: 0 0 5px rgba(101,124,89,0.2);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #526b49;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #3d5336;
+}
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.login-link a {
+    color: #526b49;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+
+@media(max-width: 700px) {
+
+    .register-container {
+        flex-direction: column;
+    }
+
+    .register-image {
+        width: 100%;
+        min-height: 180px;
+    }
+
+    .register-form {
+        width: 100%;
+        padding: 25px;
+    }
+
+}
+
+@media(max-width: 450px) {
+
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .register-form h2 {
+        font-size: 25px;
+    }
+
+}
