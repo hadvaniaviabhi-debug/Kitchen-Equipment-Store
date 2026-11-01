@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Kitchen Store</title>
+
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>Kitchen<span>Store</span></h2>
+        </div>
+
+        <div class="admin-info">
+            <div class="admin-icon">A</div>
+            <div>
+                <h3 id="adminName">Admin</h3>
+                <p>Administrator</p>
+            </div>
+        </div>
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="dashboard.html">📊 Dashboard</a>
+            </li>
+
+            <li>
+                <a href="#">📦 Products</a>
+            </li>
+
+            <li>
+                <a href="#">👥 Customers</a>
+            </li>
+
+            <li>
+                <a href="#">🛒 Orders</a>
+            </li>
+
+            <li>
+                <a href="#">💬 Messages</a>
+            </li>
+
+            <li>
+                <a href="#">⚙ Settings</a>
+            </li>
+
+        </ul>
+
+        <button id="logoutBtn" class="logout-btn">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome to Kitchen Equipment Store Admin Panel.</p>
+            </div>
+
+            <div class="profile">
+                <span>Admin Panel</span>
+            </div>
+
+        </header>
+
+
+        <!-- Dashboard Cards -->
+
+        <section class="stats-container">
+
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <h3>Total Products</h3>
+                <h2 id="totalProducts">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <h3>Total Customers</h3>
+                <h2 id="totalCustomers">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🛒</div>
+                <h3>Total Orders</h3>
+                <h2 id="totalOrders">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <h3>Total Revenue</h3>
+                <h2 id="totalRevenue">₹0</h2>
+            </div>
+
+        </section>
+
+
+        <!-- Recent Orders -->
+
+        <section class="orders-section">
+
+            <div class="section-heading">
+                <h2>Recent Orders</h2>
+                <span>Latest Customer Orders</span>
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="ordersTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p id="emptyMessage"></p>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../js/admin.js"></script>
+
+</body>
+</html>
