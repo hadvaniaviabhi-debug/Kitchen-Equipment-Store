@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Management | Kitchen Store</title>
+
+    <link rel="stylesheet" href="../css/customers.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <header class="header">
+            <div>
+                <h1>Customer Management</h1>
+                <p>Manage Your Store Customers</p>
+            </div>
+
+            <a href="dashboard.html">Back to Dashboard</a>
+        </header>
+
+
+        <!-- Customer Count -->
+
+        <div class="count-card">
+            <h3>Total Customers</h3>
+            <h2 id="totalCustomers">0</h2>
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="customer-section">
+
+            <h2>All Customers</h2>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search customer by name or email..."
+            >
+
+
+            <!-- Customer Table -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Registration Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="customerTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <p id="emptyMessage"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Customer Details Popup -->
+
+    <div id="customerModal" class="modal">
+
+        <div class="modal-content">
+
+            <span id="closeModal" class="close">&times;</span>
+
+            <h2>Customer Details</h2>
+
+            <p id="customerDetails"></p>
+
+        </div>
+
+    </div>
+
+
+    <script src="../js/customers.js"></script>
+
+</body>
+</html>

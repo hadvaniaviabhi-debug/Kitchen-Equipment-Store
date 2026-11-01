@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <link rel="stylesheet" href="../css/orders.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Kitchen Store</h2>
+
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Products</a>
+        <a href="customers.html">Customers</a>
+        <a href="orders.html" class="active">Orders</a>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="main-content">
+
+        <div class="header">
+            <h1>Order Management</h1>
+            <p>Manage all customer orders</p>
+        </div>
+
+        <div class="order-container">
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="searchOrder"
+                    placeholder="Search by Order ID or Customer Name..."
+                    onkeyup="searchOrders()"
+                >
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Order Date</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="orderTable">
+                        <!-- Orders will display here -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Order Details Popup -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+
+            <span class="close" onclick="closeModal()">&times;</span>
+
+            <h2>Order Details</h2>
+
+            <div id="orderDetails"></div>
+
+        </div>
+    </div>
+
+    <script src="../js/orders.js"></script>
+</body>
+</html>
