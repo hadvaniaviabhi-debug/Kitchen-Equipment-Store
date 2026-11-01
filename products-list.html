@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Products | KitchenStore</title>
+
+    <link rel="stylesheet" href="css/products-list.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <a href="home.html" class="logo">
+            Kitchen<span>Store</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="products-list.html" class="active">Products</a>
+            <a href="home.html#about">About</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="profile.html">My Profile</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="cart.html" class="cart-btn">🛒 Cart</a>
+            <span id="customerName">Customer</span>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+    </nav>
+
+    <!-- Page Heading -->
+    <section class="page-heading">
+        <h1>Our Products</h1>
+        <p>Explore our collection of quality kitchen equipment.</p>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+
+        <!-- Search and Filter -->
+        <div class="filter-container">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                onkeyup="filterProducts()"
+            >
+
+            <select id="categoryFilter" onchange="filterProducts()">
+                <option value="All">All Categories</option>
+                <option value="Cookware">Cookware</option>
+                <option value="Appliances">Appliances</option>
+                <option value="Utensils">Utensils</option>
+                <option value="Storage">Storage</option>
+            </select>
+
+            <select id="sortFilter" onchange="filterProducts()">
+                <option value="default">Sort By</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+            </select>
+
+        </div>
+
+        <!-- Product Count -->
+        <div class="result-heading">
+            <h2>All Products</h2>
+            <p id="productCount">0 Products Found</p>
+        </div>
+
+        <!-- Product Cards -->
+        <div class="product-container" id="productContainer">
+            <!-- Products display using JavaScript -->
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>Kitchen<span>Store</span></h2>
+        <p>Your perfect partner for a beautiful kitchen.</p>
+        <p>© 2026 KitchenStore. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/products-list.js"></script>
+
+</body>
+</html>

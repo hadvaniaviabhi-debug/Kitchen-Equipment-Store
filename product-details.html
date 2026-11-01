@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Product Details | KitchenStore</title>
+
+    <link rel="stylesheet" href="css/product-details.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <a href="home.html" class="logo">
+            Kitchen<span>Store</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="products-list.html">Products</a>
+            <a href="home.html#about">About</a>
+            <a href="home.html#contact">Contact</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="cart.html" class="cart-btn">🛒 Cart</a>
+            <span id="customerName">Customer</span>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="home.html">Home</a> /
+        <a href="products-list.html">Products</a> /
+        <span>Product Details</span>
+    </div>
+
+    <!-- Product Details -->
+    <section class="details-section">
+
+        <div class="product-image">
+            <img id="productImage" src="" alt="Product Image">
+        </div>
+
+        <div class="product-info">
+
+            <p class="category" id="productCategory"></p>
+
+            <h1 id="productName">Product Name</h1>
+
+            <h2 class="price" id="productPrice">₹0</h2>
+
+            <p class="description" id="productDescription">
+                Product details will appear here.
+            </p>
+
+            <p class="stock" id="productStock"></p>
+
+            <div class="quantity-box">
+
+                <label for="quantity">Quantity:</label>
+
+                <div class="quantity-control">
+                    <button onclick="decreaseQuantity()">−</button>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        value="1"
+                        min="1"
+                    >
+
+                    <button onclick="increaseQuantity()">+</button>
+                </div>
+
+            </div>
+
+            <button id="addCartBtn" class="add-cart-btn"
+                onclick="addToCart()">
+                Add to Cart
+            </button>
+
+            <a href="products-list.html" class="back-btn">
+                ← Back to Products
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>Kitchen<span>Store</span></h2>
+        <p>Your perfect partner for a beautiful kitchen.</p>
+        <p>© 2026 KitchenStore. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/product-details.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Kitchen Store</title>
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="home.html" class="logo">Kitchen<span>Store</span></a>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="products-list.html">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="my-orders.html">My Orders</a>
+            <a href="contact.html" class="active">Contact Us</a>
+            <a href="profile.html">My Profile</a>
+            <span id="customerName"></span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+
+        <div class="page-heading">
+            <h1>Contact Us</h1>
+            <p>Have a question? We would love to hear from you.</p>
+        </div>
+
+        <div class="contact-layout">
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+
+                <h2>Get In Touch</h2>
+
+                <p>
+                    If you have any questions about our kitchen products,
+                    orders or services, feel free to contact us.
+                </p>
+
+                <div class="info-item">
+                    <span>📍</span>
+                    <div>
+                        <h3>Our Address</h3>
+                        <p>Kitchen Store, Gujarat, India</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span>📞</span>
+                    <div>
+                        <h3>Phone Number</h3>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span>✉️</span>
+                    <div>
+                        <h3>Email Address</h3>
+                        <p>support@kitchenstore.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span>🕒</span>
+                    <div>
+                        <h3>Working Hours</h3>
+                        <p>Monday - Saturday: 9 AM - 6 PM</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+
+                <h2>Send Us a Message</h2>
+
+                <form id="contactForm">
+
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required>
+
+                    <label>Email Address</label>
+                    <input type="email" id="email" required>
+
+                    <label>Subject</label>
+                    <input type="text" id="subject" required>
+
+                    <label>Your Message</label>
+                    <textarea id="message" rows="5"
+                              placeholder="Write your message here..."
+                              required></textarea>
+
+                    <button type="submit">Send Message</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 Kitchen Store. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Kitchen Store</title>
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="home.html" class="logo">Kitchen<span>Store</span></a>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="products-list.html">Products</a>
+            <a href="cart.html" class="active">Cart</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="profile.html">My Profile</a>
+            <span id="customerName"></span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+
+        <div class="page-heading">
+            <h1>Shopping Cart</h1>
+            <p>Review your selected kitchen products</p>
+        </div>
+
+        <div class="cart-layout">
+
+            <!-- Cart Products -->
+            <div class="cart-products">
+                <h2>Cart Items (<span id="cartCount">0</span>)</h2>
+
+                <div id="cartContainer"></div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="cart-summary">
+                <h2>Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₹0</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+
+                <hr>
+
+                <div class="summary-row total-row">
+                    <span>Total</span>
+                    <span id="total">₹0</span>
+                </div>
+
+                <button id="checkoutBtn" onclick="goToCheckout()">
+                    Proceed to Checkout
+                </button>
+
+                <a href="products-list.html" class="continue-link">
+                    Continue Shopping
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 Kitchen Store. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>
