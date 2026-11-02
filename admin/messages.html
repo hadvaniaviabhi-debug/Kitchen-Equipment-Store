@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | Admin Panel</title>
+    <link rel="stylesheet" href="../css/messages.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Kitchen Store</h2>
+
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Products</a>
+        <a href="customers.html">Customers</a>
+        <a href="orders.html">Orders</a>
+        <a href="messages.html" class="active">Review</a>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="main-content">
+
+        <div class="header">
+            <h1>Customer Messages</h1>
+            <p>Manage customer enquiries</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Messages</h3>
+                <h2 id="totalMessages">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>New Messages</h3>
+                <h2 id="newMessages">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>Read Messages</h3>
+                <h2 id="readMessages">0</h2>
+            </div>
+        </div>
+
+        <div class="message-section">
+
+            <div class="section-header">
+                <h2>All Messages</h2>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search name, email or subject..."
+                    oninput="displayMessages()"
+                >
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="messageTable">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Message Details Modal -->
+    <div id="messageModal" class="modal">
+
+        <div class="modal-content">
+
+            <span class="close" onclick="closeModal()">&times;</span>
+
+            <h2>Message Details</h2>
+
+            <p><strong>Name:</strong> <span id="detailName"></span></p>
+            <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+            <p><strong>Subject:</strong> <span id="detailSubject"></span></p>
+            <p><strong>Date:</strong> <span id="detailDate"></span></p>
+
+            <h3>Message:</h3>
+            <p id="detailMessage" class="message-text"></p>
+
+            <button onclick="closeModal()" class="close-btn">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="../js/messages.js"></script>
+</body>
+</html>
