@@ -1,264 +1,348 @@
 
-// Check Admin Login
+// Admin Login Check
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-let user = JSON.parse(localStorage.getItem("currentUser"));
-
-if (user == null || user.userType != "admin") {
+if (!currentUser || currentUser.userType !== "admin") {
     window.location.href = "../login.html";
 }
 
+// Get Products from Local Storage
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+let editingId = null;
 
 // Get HTML Elements
+let productForm = document.getElementById("productForm");
 
-let form = document.getElementById("productForm");
+let productName = document.getElementById("productName");
+let category = document.getElementById("category");
+let description = document.getElementById("description");
+let price = document.getElementById("price");
+let stock = document.getElementById("stock");
+let image = document.getElementById("image");
 
-let productList = document.getElementById("productList");
-
+let submitBtn = document.getElementById("submitBtn");
+let cancelBtn = document.getElementById("cancelBtn");
+let formTitle = document.getElementById("formTitle");
 let message = document.getElementById("message");
 
+let productList = document.getElementById("productList");
 let search = document.getElementById("search");
 
 
-// Get Products From LocalStorage
-
-let products = JSON.parse(localStorage.getItem("products")) || [];
-
-
-// Edit Product Index
-
-let editIndex = -1;
-
-
-// Save Products In LocalStorage
-
+// Save Products
 function saveProducts() {
     localStorage.setItem("products", JSON.stringify(products));
 }
 
 
-// Display All Products
+// Add and Update Product
+productForm.addEventListener("submit", function(event) {
 
+    event.preventDefault();
+
+    let name = productName.value.trim();
+    let selectedCategory = category.value;
+    let productDescription = description.value.trim();
+    let productPrice = Number(price.value);
+    let productStock = Number(stock.value);
+    let productImage = image.value.trim();
+
+    // Validation
+    if (
+        name === "" ||
+        selectedCategory === "" ||
+        productDescription === "" ||
+        productImage === "" ||
+        !Number.isFinite(productPrice) ||
+        productPrice <= 0 ||
+        !Number.isInteger(productStock) ||
+        productStock < 0
+    ) {
+        message.innerText = "Please enter valid product details.";
+        message.style.color = "red";
+        return;
+    }
+
+    // Check Image URL
+    try {
+
+        let imageURL = new URL(productImage);
+
+        if (
+            imageURL.protocol !== "https:" &&
+            imageURL.protocol !== "http:"
+        ) {
+            message.innerText = "Please enter a valid image URL.";
+            message.style.color = "red";
+            return;
+        }
+
+    } catch (error) {
+
+        message.innerText = "Please enter a valid image URL.";
+        message.style.color = "red";
+        return;
+    }
+
+
+    if (editingId === null) {
+
+        // Add New Product
+        let newProduct = {
+            id: Date.now(),
+            name: name,
+            category: selectedCategory,
+            description: productDescription,
+            price: productPrice,
+            stock: productStock,
+            image: productImage
+        };
+
+        products.push(newProduct);
+
+        message.innerText = "Product added successfully!";
+        message.style.color = "green";
+
+    } else {
+
+        // Update Existing Product
+        for (let i = 0; i < products.length; i++) {
+
+            if (products[i].id === editingId) {
+
+                products[i].name = name;
+                products[i].category = selectedCategory;
+                products[i].description = productDescription;
+                products[i].price = productPrice;
+                products[i].stock = productStock;
+                products[i].image = productImage;
+            }
+        }
+
+        message.innerText = "Product updated successfully!";
+        message.style.color = "green";
+    }
+
+    // Save and Display
+    saveProducts();
+
+    displayProducts();
+
+    resetForm();
+
+});
+
+
+// Display Products
 function displayProducts() {
+
+    products = JSON.parse(localStorage.getItem("products")) || [];
+
+    let searchValue = search.value.toLowerCase();
 
     productList.innerHTML = "";
 
-    let found = false;
+    let filteredProducts = products.filter(function(product) {
 
-    for (let i = 0; i < products.length; i++) {
+        return (
+            (product.name || "").toLowerCase().includes(searchValue) ||
+            (product.category || "").toLowerCase().includes(searchValue)
+        );
 
-        let p = products[i];
-
-        // Search Product
-
-        if (p.name.toLowerCase().includes(search.value.toLowerCase())) {
-
-            found = true;
-
-            productList.innerHTML += `
-                <div class="product-card">
-
-                    <img src="${p.image}" alt="Product"
-                    onerror="this.onerror=null;this.src='https://placehold.co/400x250?text=No+Image'">
-
-                    <div class="product-info">
-
-                        <h3>${p.name}</h3>
-
-                        <p>Category: ${p.category}</p>
-
-                        <p>Price: ₹${p.price}</p>
-
-                        <p>Stock: ${p.stock}</p>
-
-                        <button class="edit-btn" onclick="editProduct(${i})">
-                            Edit
-                        </button>
-
-                        <button class="delete-btn" onclick="deleteProduct(${i})">
-                            Delete
-                        </button>
-
-                    </div>
-
-                </div>
-            `;
-        }
-    }
-
-    if (found == false) {
-        productList.innerHTML = "<p>No Products Found!</p>";
-    }
-}
+    });
 
 
-// Add Or Update Product
+    if (filteredProducts.length === 0) {
 
-form.addEventListener("submit", function(e) {
-
-    e.preventDefault();
-
-    let name = document.getElementById("productName").value.trim();
-
-    let category = document.getElementById("category").value;
-
-    let price = Number(document.getElementById("price").value);
-
-    let stock = Number(document.getElementById("stock").value);
-
-    let image = document.getElementById("image").value.trim();
-
-
-    // Check Values
-
-    if (name == "" || category == "" || price <= 0 || stock < 0 || image == "") {
-
-        message.innerText = "Please enter valid product details!";
-
-        message.style.color = "red";
+        productList.innerHTML = "<p>No products found.</p>";
 
         return;
     }
 
 
-    // Create Product Object
+    for (let i = 0; i < filteredProducts.length; i++) {
 
-    let product = {
+        let product = filteredProducts[i];
 
-        id: editIndex == -1 ? Date.now() : products[editIndex].id,
+        let card = document.createElement("div");
 
-        name: name,
+        card.className = "product-card";
 
-        category: category,
+        // Product Image
+        let productImage = "";
 
-        price: price,
+        try {
 
-        stock: stock,
+            let imageURL = new URL(product.image);
 
-        image: image
+            if (
+                imageURL.protocol === "http:" ||
+                imageURL.protocol === "https:"
+            ) {
+                productImage = imageURL.href;
+            }
 
-    };
+        } catch (error) {
+            productImage = "";
+        }
 
+        card.innerHTML = `
 
-    // Add Or Update
+            <img
+                src="${escapeHTML(productImage)}"
+                alt="${escapeHTML(product.name)}"
+                onerror="this.style.display='none'"
+            >
 
-    if (editIndex == -1) {
+            <h3>${escapeHTML(product.name)}</h3>
 
-        products.push(product);
+            <p>
+                <strong>Category:</strong>
+                ${escapeHTML(product.category)}
+            </p>
 
-        message.innerText = "Product Added Successfully!";
+            <p>
+                <strong>Description:</strong>
+                ${escapeHTML(product.description || "No description available.")}
+            </p>
 
-    } else {
+            <p>
+                <strong>Price:</strong>
+                ₹${Number(product.price).toLocaleString("en-IN")}
+            </p>
 
-        products[editIndex] = product;
+            <p>
+                <strong>Stock:</strong>
+                ${Number(product.stock)}
+            </p>
 
-        message.innerText = "Product Updated Successfully!";
+            <button
+                class="edit-btn"
+                onclick="editProduct(${Number(product.id)})">
+                Edit
+            </button>
 
+            <button
+                class="delete-btn"
+                onclick="deleteProduct(${Number(product.id)})">
+                Delete
+            </button>
+
+        `;
+
+        productList.appendChild(card);
     }
 
-
-    message.style.color = "green";
-
-
-    // Save Data
-
-    saveProducts();
+}
 
 
-    // Reset Form
+// Safe HTML Text
+function escapeHTML(value) {
 
-    form.reset();
+    let div = document.createElement("div");
 
-    editIndex = -1;
+    div.textContent = value == null ? "" : String(value);
 
-    document.getElementById("formTitle").innerText = "Add New Product";
-
-    document.getElementById("submitBtn").innerText = "Add Product";
-
-    document.getElementById("cancelBtn").style.display = "none";
-
-
-    // Display Products
-
-    displayProducts();
-
-});
+    return div.innerHTML;
+}
 
 
 // Edit Product
+function editProduct(id) {
 
-function editProduct(index) {
+    let product = products.find(function(item) {
 
-    editIndex = index;
+        return item.id === id;
 
-    let p = products[index];
+    });
 
-    document.getElementById("productName").value = p.name;
+    if (!product) {
+        return;
+    }
 
-    document.getElementById("category").value = p.category;
+    // Fill Form
+    productName.value = product.name;
+    category.value = product.category;
+    description.value = product.description || "";
+    price.value = product.price;
+    stock.value = product.stock;
+    image.value = product.image;
 
-    document.getElementById("price").value = p.price;
+    editingId = id;
 
-    document.getElementById("stock").value = p.stock;
+    formTitle.innerText = "Edit Product";
+    submitBtn.innerText = "Update Product";
 
-    document.getElementById("image").value = p.image;
-
-
-    document.getElementById("formTitle").innerText = "Edit Product";
-
-    document.getElementById("submitBtn").innerText = "Update Product";
-
-    document.getElementById("cancelBtn").style.display = "inline-block";
+    cancelBtn.style.display = "inline-block";
 
     message.innerText = "";
 
-    window.scrollTo(0, 0);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 }
 
 
 // Delete Product
+function deleteProduct(id) {
 
-function deleteProduct(index) {
+    let confirmDelete = confirm(
+        "Are you sure you want to delete this product?"
+    );
 
-    let confirmDelete = confirm("Are you sure you want to delete this product?");
+    if (confirmDelete) {
 
-    if (confirmDelete == true) {
+        products = products.filter(function(product) {
 
-        products.splice(index, 1);
+            return product.id !== id;
+
+        });
 
         saveProducts();
 
         displayProducts();
 
-        message.innerText = "Product Deleted Successfully!";
+        if (editingId === id) {
+            resetForm();
+        }
 
-        message.style.color = "green";
+        alert("Product deleted successfully!");
+
     }
 
 }
 
 
+// Reset Form
+function resetForm() {
+
+    productForm.reset();
+
+    editingId = null;
+
+    formTitle.innerText = "Add New Product";
+
+    submitBtn.innerText = "Add Product";
+
+    cancelBtn.style.display = "none";
+
+}
+
+
 // Cancel Edit
+cancelBtn.addEventListener("click", function() {
 
-document.getElementById("cancelBtn").addEventListener("click", function() {
-
-    form.reset();
-
-    editIndex = -1;
-
-    document.getElementById("formTitle").innerText = "Add New Product";
-
-    document.getElementById("submitBtn").innerText = "Add Product";
-
-    document.getElementById("cancelBtn").style.display = "none";
+    resetForm();
 
     message.innerText = "";
 
 });
 
 
-// Search Product
-
+// Search Products
 search.addEventListener("input", function() {
 
     displayProducts();
@@ -266,6 +350,5 @@ search.addEventListener("input", function() {
 });
 
 
-// Display Products When Page Opens
-
+// First Time Display
 displayProducts();
